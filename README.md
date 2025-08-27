@@ -5,10 +5,7 @@ A pull-request–based evaluation dataset built from QuixBugs. Each bug is intro
 
 ### Python-only subset, without comments
 
-Only Python subset of QuixBugs is included, and all code comments are removed.
-
-This follows the same setting as in [An Analysis of the Automatic Bug Fixing Performance of ChatGPT](https://arxiv.org/abs/2205.10583)
-, since this study needs to compare against their results.
+Only Python subset of QuixBugs is included, and all code comments that can reveal the solution are removed.
 
 ### Buggy programs only
 
