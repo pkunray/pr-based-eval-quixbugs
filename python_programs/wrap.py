@@ -1,4 +1,6 @@
 def wrap(text, cols):
+    if len(text) <= cols:
+        return [text]
     lines = []
     while len(text) > cols:
         end = text.rfind(' ', 0, cols + 1)
@@ -6,5 +8,6 @@ def wrap(text, cols):
             end = cols
         line, text = text[:end], text[end:]
         lines.append(line)
-        
+    if text:
+        lines.append(text)
     return lines
