@@ -6,5 +6,6 @@ def wrap(text, cols):
             end = cols
         line, text = text[:end], text[end:]
         lines.append(line)
-        
+    if text:
+        lines.append(text)
     return lines
