@@ -7,7 +7,7 @@ def shortest_path_length(length_by_edge, startnode, goalnode):
 
     while len(unvisited_nodes) > 0:
         distance, node = heappop(unvisited_nodes)
-        if node is goalnode:
+        if node == goalnode:
             return distance
 
         visited_nodes.add(node)
