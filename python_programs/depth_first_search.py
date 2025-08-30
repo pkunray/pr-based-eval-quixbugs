@@ -4,7 +4,8 @@ def depth_first_search(startnode, goalnode):
     def search_from(node):
         if node in nodesvisited:
             return False
-        elif node is goalnode:
+        nodesvisited.add(node)
+        if node is goalnode:
             return True
         else:
             return any(
@@ -12,7 +13,6 @@ def depth_first_search(startnode, goalnode):
             )
 
     return search_from(startnode)
-
 
 
 """
