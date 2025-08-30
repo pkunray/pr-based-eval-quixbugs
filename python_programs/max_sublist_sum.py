@@ -9,6 +9,8 @@ def max_sublist_sum(arr):
     return max_so_far
 
 """
+Find the maximum subarray sum, allowing the empty subarray (so the answer is non-negative).
+
 Input:
     arr: A list of ints
 
