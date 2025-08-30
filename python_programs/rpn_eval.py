@@ -1,4 +1,3 @@
-
 def rpn_eval(tokens):
     def op(symbol, a, b):
         return {
@@ -14,14 +13,18 @@ def rpn_eval(tokens):
         if isinstance(token, float):
             stack.append(token)
         else:
-            a = stack.pop()
+            if len(stack) < 2:
+                raise ValueError("Insufficient operands for operation")
             b = stack.pop()
+            a = stack.pop()
             stack.append(
                 op(token, a, b)
             )
 
-    return stack.pop()
+    if len(stack) != 1:
+        raise ValueError("The user input has too many operands.")
 
+    return stack.pop()
 
 
 """
