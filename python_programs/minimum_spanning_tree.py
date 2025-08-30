@@ -1,4 +1,3 @@
-
 def minimum_spanning_tree(weight_by_edge):
     group_by_node = {}
     mst_edges = set()
@@ -7,9 +6,11 @@ def minimum_spanning_tree(weight_by_edge):
         u, v = edge
         if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):
             mst_edges.add(edge)
-            group_by_node[u].update(group_by_node[v])
-            for node in group_by_node[v]:
-                group_by_node[node].update(group_by_node[u])
+            group_u = group_by_node[u]
+            group_v = group_by_node[v]
+            group_u.update(group_v)
+            for node in list(group_v):  # Use a temporary list to avoid modifying the set during iteration
+                group_by_node[node] = group_u
 
     return mst_edges
 
