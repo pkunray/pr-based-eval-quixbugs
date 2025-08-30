@@ -1,34 +1,30 @@
 def next_palindrome(digit_list):
-    high_mid = len(digit_list) // 2
-    low_mid = (len(digit_list) - 1) // 2
-    while high_mid < len(digit_list) and low_mid >= 0:
-        if digit_list[high_mid] == 9:
-            digit_list[high_mid] = 0
-            digit_list[low_mid] = 0
-            high_mid += 1
-            low_mid -= 1
-        else:
-            digit_list[high_mid] += 1
-            if low_mid != high_mid:
-                digit_list[low_mid] += 1
-            return digit_list
-    return [1] + (len(digit_list) - 1) * [0] + [1]
+    n = len(digit_list)
+    if all(x == 9 for x in digit_list):
+        return [1] + [0] * (n - 1) + [1]
 
-"""
-Next Permutation
-next-perm
+    # Step 1: Mirror the left half onto the right half
+    left_half = digit_list[:(n + 1) // 2]
+    if n % 2 == 0:
+        candidate = left_half + left_half[::-1]
+    else:
+        candidate = left_half + left_half[-2::-1]
 
+    # Step 2: Check if the candidate is greater than the original
+    if candidate > digit_list:
+        return candidate
 
-Input:
-    perm: A list of unique ints
+    # Step 3: Increment the middle digit(s) and mirror again
+    i = (n - 1) // 2
+    while i >= 0:
+        if digit_list[i] < 9:
+            digit_list[i] += 1
+            break
+        digit_list[i] = 0
+        i -= 1
 
-Precondition:
-    perm is not sorted in reverse order
-
-Output:
-    The lexicographically next permutation of the elements of perm
-
-Example:
-    >>> next_permutation([3, 2, 4, 1])
-    [3, 4, 1, 2]
-"""
+    left_half = digit_list[:(n + 1) // 2]
+    if n % 2 == 0:
+        return left_half + left_half[::-1]
+    else:
+        return left_half + left_half[-2::-1]
