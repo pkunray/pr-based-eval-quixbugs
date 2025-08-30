@@ -1,5 +1,7 @@
-
 def rpn_eval(tokens):
+    if not tokens:
+        raise ValueError('Empty input not allowed')
+
     def op(symbol, a, b):
         return {
             '+': lambda a, b: a + b,
@@ -13,12 +15,19 @@ def rpn_eval(tokens):
     for token in tokens:
         if isinstance(token, float):
             stack.append(token)
-        else:
+        elif token in ('+', '-', '*', '/'):
+            if len(stack) < 2:
+                raise ValueError('Insufficient operands')
             a = stack.pop()
             b = stack.pop()
-            stack.append(
-                op(token, b, a)
-            )
+            if token == '/' and a == 0:
+                raise ZeroDivisionError('Division by zero')
+            stack.append(op(token, b, a))
+        else:
+            raise ValueError(f'Invalid token: {token}')
+
+    if len(stack) != 1:
+        raise ValueError('Malformed expression')
 
     return stack.pop()
 
