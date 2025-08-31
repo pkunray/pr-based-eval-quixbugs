@@ -1,4 +1,3 @@
-
 def shunting_yard(tokens):
     precedence = {
         '+': 1,
@@ -15,9 +14,9 @@ def shunting_yard(tokens):
         else:
             while opstack and precedence[token] <= precedence[opstack[-1]]:
                 rpntokens.append(opstack.pop())
+            opstack.append(token)  # Push the current operator token onto opstack
 
     while opstack:
         rpntokens.append(opstack.pop())
 
     return rpntokens
-
