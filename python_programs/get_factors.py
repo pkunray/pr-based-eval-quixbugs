@@ -6,4 +6,4 @@ def get_factors(n):
         if n % i == 0:
             return [i] + get_factors(n // i)
 
-    return []
+    return [n]
